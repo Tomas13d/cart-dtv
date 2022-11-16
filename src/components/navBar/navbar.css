@@ -1,0 +1,36 @@
+.navbar-style {
+  width: 100%;
+  height: 85px;
+  background-color: #1c617f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icons {
+  margin-left: 20px;
+  color: #fff;
+  font-size: 40px;
+}
+
+.icons-2 {
+   margin-left: 20px;
+   color: #fff;
+   font-size: 35px;
+ }
+
+.mg-r{
+   margin-right: 20px;
+}
+.icons:hover{
+   cursor: pointer;
+}
+.icons-2:hover{
+   cursor: pointer;
+}
+
+.input-search-cont {
+  margin: 0px 20px;
+}
+
+
