@@ -1,44 +1,41 @@
-.offcanvas-title-cont{
-    border-bottom: 1px solid #B4B4B4;
- }
- .offcanvas-body-custom{
-    padding: 0 !important;
- }
-
- .item-box{
-    width: 100%;
-    padding: 10px;
-    background-color: #eceaea85;
-    margin: 20px 0px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
- }
-
- .item-box:hover{
-    cursor: pointer;
- }
-
- .arrow-custom{
-    font-size: 20px;
- }
-
-
-.logout-box{
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    padding: 20px;
-    border-top: 1px solid rgba(182, 182, 182, 0.596);
-
+.offcanvas-title-cont {
+  border-bottom: 1px solid #b4b4b4;
 }
-.user-icon{
-    color: #1C9CDF;
-    font-size: 25px;
+.offcanvas-body-custom {
+  padding: 0 !important;
 }
 
-.logout-message:hover{
-    cursor: pointer;
-    color: #B4B4B4;
+.item-box {
+  width: 100%;
+  padding: 10px;
+  background-color: #eceaea85;
+  margin: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
- 
+
+.item-box:hover {
+  cursor: pointer;
+}
+
+.arrow-custom {
+  font-size: 20px;
+}
+
+.logout-box {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding: 20px;
+  border-top: 1px solid rgba(182, 182, 182, 0.596);
+}
+.user-icon {
+  color: #1c9cdf;
+  font-size: 25px;
+}
+
+.logout-message:hover {
+  cursor: pointer;
+  color: #b4b4b4;
+}

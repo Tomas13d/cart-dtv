@@ -25,10 +25,31 @@ function App() {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
+    {
+      id: 4,
+      name: "Casco",
+      img: "https://http2.mlstatic.com/D_NQ_NP_2X_713838-MLA51507869848_092022-F.webp",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: 5,
+      name: "Casco",
+      img: "https://http2.mlstatic.com/D_NQ_NP_2X_713838-MLA51507869848_092022-F.webp",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: 6,
+      name: "Casco",
+      img: "https://http2.mlstatic.com/D_NQ_NP_2X_713838-MLA51507869848_092022-F.webp",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
   ];
 
   useEffect(() => {
-    if(window){
+    if (window) {
       window.localStorage.setItem("Cart", JSON.stringify(products));
     }
   }, [window]);

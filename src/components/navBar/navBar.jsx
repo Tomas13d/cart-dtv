@@ -11,11 +11,19 @@ function NavBar() {
   return (
     <header className="navbar-style">
       {/* Categories and navbar Icon */}
-      <i className="bi bi-list icons" onClick={() => setShowCategories(true)}></i>
-      <MenuOffcanvas showCategories={showCategories} setShowCategories={setShowCategories}/>
-        {/* Searcher */}
-        <InputGroup className="input-search-cont">
-        <InputGroup.Text id="basic-addon1"><i className="bi bi-search"></i></InputGroup.Text>
+      <i
+        className="bi bi-list icons"
+        onClick={() => setShowCategories(true)}
+      ></i>
+      <MenuOffcanvas
+        showCategories={showCategories}
+        setShowCategories={setShowCategories}
+      />
+      {/* Searcher */}
+      <InputGroup className="input-search-cont">
+        <InputGroup.Text id="basic-addon1">
+          <i className="bi bi-search"></i>
+        </InputGroup.Text>
         <Form.Control
           placeholder="Buscar..."
           aria-label="Username"
@@ -26,9 +34,12 @@ function NavBar() {
       {/* User */}
       <i className="bi bi-person-circle icons-2"></i>
 
-    {/* Cart */}
-      <i className="bi bi-cart icons-2 mg-r" onClick={() => setShowCart(true)}></i>
-      <CartOffcanvas showCart={showCart} setShowCart={setShowCart}/>
+      {/* Cart */}
+      <i
+        className="bi bi-cart icons-2 mg-r"
+        onClick={() => setShowCart(true)}
+      ></i>
+      <CartOffcanvas showCart={showCart} setShowCart={setShowCart} />
     </header>
   );
 }

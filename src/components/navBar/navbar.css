@@ -14,23 +14,21 @@
 }
 
 .icons-2 {
-   margin-left: 20px;
-   color: #fff;
-   font-size: 35px;
- }
+  margin-left: 20px;
+  color: #fff;
+  font-size: 35px;
+}
 
-.mg-r{
-   margin-right: 20px;
+.mg-r {
+  margin-right: 20px;
 }
-.icons:hover{
-   cursor: pointer;
+.icons:hover {
+  cursor: pointer;
 }
-.icons-2:hover{
-   cursor: pointer;
+.icons-2:hover {
+  cursor: pointer;
 }
 
 .input-search-cont {
   margin: 0px 20px;
 }
-
-
