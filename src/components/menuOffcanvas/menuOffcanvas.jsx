@@ -23,14 +23,14 @@ function MenuOffcanvas({setShowCategories, showCategories}) {
   ];
 
   return (
-        <Offcanvas show={showCategories} onClick={() => setShowCategories(false)}>
+        <Offcanvas show={showCategories} onHide={()=> setShowCategories(false)}>
           <Offcanvas.Header className="offcanvas-title-cont" closeButton>
             <Offcanvas.Title>{`Hola ${user}`}</Offcanvas.Title>
           </Offcanvas.Header>
        
           <Offcanvas.Body className="offcanvas-body-custom">
           {categories.map((item, i) => (
-            <div className="item-box">
+            <div className="item-box" key={i}>
                 <h4><i className={item.icon}> </i>{item.name}</h4> <i className="bi bi-arrow-right arrow-custom"> </i>
             </div>
         ))}

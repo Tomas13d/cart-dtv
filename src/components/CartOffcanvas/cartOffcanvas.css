@@ -2,3 +2,73 @@
     border-bottom: 1px solid #B4B4B4;
  }
  
+.cart-item{
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid #B4B4B4;
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-img-title-cont{
+    display: flex;
+}
+
+.cart-item-img{
+    width: 80px;
+    height: 80px;
+}
+
+.cart-item-title{
+    margin:  0px 20px;
+    font-weight: 400;
+}
+
+.cart-item-trash{
+    font-size: 18px;
+}
+
+.cart-item-trash:hover{
+    cursor: pointer;
+    color: rgb(200, 50, 50);
+}
+
+.send-request{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+    border-top: 1px solid rgba(182, 182, 182, 0.596);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.send-reques-button{
+    margin: 5px;
+    width: 163px;
+}
+
+.cancel{
+    background: rgb(200, 50, 50) !important;
+    border: none !important;
+}
+
+.cancel:hover{
+    background: rgb(223, 28, 28) !important;
+}
+
+.send{
+    background: #1C9CDF !important;
+    border: none !important;
+}
+
+.send:hover{
+    background: #077fef !important;
+}
+
+.no-elements-cart{
+    margin: 10px;
+}
