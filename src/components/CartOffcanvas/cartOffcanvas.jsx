@@ -2,19 +2,21 @@ import React from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import "./cartOffcanvas.css";
 
-function CartOffcanvas({setShowCart, showCart}) {
-
+function CartOffcanvas({ setShowCart, showCart }) {
+  
   return (
-    <Offcanvas show={showCart} placement="end" onClick={() => setShowCart(false)}>
-    <Offcanvas.Header className="offcanvas-title-cont" closeButton>
-      <Offcanvas.Title>Mi Listado</Offcanvas.Title>
-    </Offcanvas.Header>
-    <Offcanvas.Body>
-      Some text as placeholder. In real life you can have the elements you
-      have chosen. Like, text, images, lists, etc.
-    </Offcanvas.Body>
-  </Offcanvas>
-
+    <Offcanvas
+      show={showCart}
+      placement="end"
+      onClick={() => setShowCart(false)}
+    >
+      <Offcanvas.Header className="offcanvas-title-cont" closeButton>
+        <Offcanvas.Title>Mi Listado</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>
+      
+      </Offcanvas.Body>
+    </Offcanvas>
   );
 }
 
