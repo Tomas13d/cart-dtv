@@ -1,6 +1,7 @@
 import NavBar from "./components/navBar/navBar";
 import "./App.css";
 import { useEffect } from "react";
+import Content from "./common/content";
 
 function App() {
   const products = [
@@ -57,6 +58,7 @@ function App() {
   return (
     <>
       <NavBar />
+      <Content products={products}/>
     </>
   );
 }
