@@ -9,12 +9,12 @@ function CartOffcanvas({ setShowCart, showCart }) {
   const [cart, setCart] = useState([]);
   
 
-  const {flag, setFlag} = useContext(GeneralContext)
+  const {generalData, setGeneralData} = useContext(GeneralContext)
 
   useEffect(() => {
     const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
     setCart(storageCart);
-  }, [flag]);
+  }, [generalData]);
 
   const handleSend = () => {
     swal({
@@ -26,7 +26,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
     .then((willDelete) => {
       if (willDelete) {
         window.localStorage.clear();
-        setFlag(flag ? false : true);
+        setGeneralData({...generalData, windowFlag: !generalData})
         swal("Tu pedido fue realizado", {
           icon: "success",
         });
@@ -39,7 +39,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
         })
       }
     });
-    setFlag(flag ? false : true);
+    setGeneralData({...generalData, windowFlag: !generalData})
   };
 
   const handleDelet = (item) => {
@@ -50,7 +50,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
       }
     }
     window.localStorage.setItem("Cart", JSON.stringify(storageCart));
-    setFlag(flag ? false : true);
+    setGeneralData({...generalData, windowFlag: !generalData})
   };
 
   const handleDeletAll = () => {
@@ -62,7 +62,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
     .then((willDelete) => {
       if (willDelete) {
         window.localStorage.clear();
-        setFlag(flag ? false : true);
+        setGeneralData({...generalData, windowFlag: !generalData})
         swal("Se eliminaron todos los productos", {
           icon: "success",
         });

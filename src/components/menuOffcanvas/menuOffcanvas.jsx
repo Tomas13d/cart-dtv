@@ -1,36 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { GeneralContext } from "../../context/generalContext";
+import categories from "../../utils/categories";
 import "./menuOffcanvas.css";
 
 function MenuOffcanvas({ setShowCategories, showCategories }) {
-  const user = "Carlos";
-  const categories = [
-    {
-      icon: "bi bi-plugin",
-      name: "Herramientas Eléctricas",
-      subcategories: "",
-    },
-    {
-      icon: "bi bi-screwdriver",
-      name: "Herramientas Manuales",
-      subcategories: "",
-    },
-    {
-      icon: "bi bi-shield-check",
-      name: "Proteccion Personal",
-      subcategories: "",
-    },
-  ];
+
+  const {generalData, setGeneralData} = useContext(GeneralContext)
+  
+const handleCategorieSelect = (item) => {
+  setGeneralData({...generalData, selectedCategorie: item})
+  setShowCategories(false)
+
+}
 
   return (
     <Offcanvas show={showCategories} onHide={() => setShowCategories(false)}>
       <Offcanvas.Header className="offcanvas-title-cont" closeButton>
-        <Offcanvas.Title>{`Hola ${user}`}</Offcanvas.Title>
+        <Offcanvas.Title>{`Hola ${""}`}</Offcanvas.Title>
       </Offcanvas.Header>
+
 
       <Offcanvas.Body className="offcanvas-body-custom">
         {categories.map((item, i) => (
-          <div className="item-box" key={i}>
+          <div className="item-box" key={i} onClick={() => handleCategorieSelect(item)} >
             <h4>
               <i className={item.icon}> </i>
               {item.name}

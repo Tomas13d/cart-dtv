@@ -3,9 +3,9 @@ import swal from "sweetalert";
 import { GeneralContext } from "../../context/generalContext";
 import "./content.css";
 
-function Content({ products, title = "Todos los Productos" }) {
+function Content({ products}) {
 
-  const {flag, setFlag} = useContext(GeneralContext)
+  const {generalData, setGeneralData} = useContext(GeneralContext)
 
   const handleAdd = (item) => {
     const storageCart = window.localStorage.getItem('Cart')
@@ -17,7 +17,7 @@ function Content({ products, title = "Todos los Productos" }) {
       const newCart = [item]
       window.localStorage.setItem('Cart', JSON.stringify(newCart))
     }
-    setFlag(flag ? false : true);
+    setGeneralData({...generalData, windowFlag: !generalData})
     swal({
       title: "Agregado",
       text: "Se añadió un producto a la lista",
@@ -29,7 +29,7 @@ function Content({ products, title = "Todos los Productos" }) {
 
   return (
     <section className="center-content-cont">
-      <h4 className="content-title">{title}</h4>
+      <h4 className="content-title">{generalData.selectedCategorie.name ? generalData.selectedCategorie.name : "Todos los productos"}</h4>
       <div className="cards-cont">
         {products && products.length > 0 ? (
           <>
