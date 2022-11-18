@@ -6,8 +6,6 @@
     max-width: 600px;
 }
 
-
-
 .img-card-cont{
     width: 100px;
     height: 100px;
@@ -60,4 +58,16 @@
     height: 30px;
     border: none;
     border-radius: 4px;
+}
+
+.no-img{
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 70px;
+    background-color: #1c9bdf96;
+    color: #fff;
+    font-size: 30px;
 }

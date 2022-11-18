@@ -36,11 +36,15 @@ function Content({ products}) {
             {products.map((item, i) => (
               <div className="item-card" key={i}>
                 <div className="img-card-cont">
-                <img
-                    src={item.img}
-                    className="cart-item-img"
-                    alt={item.name}
-                  />
+                  {item.img ? (
+                      <img
+                      src={item.img}
+                      className="cart-item-img"
+                      alt={item.name}
+                    />
+                  ) : (
+                    <div className="no-img">{item.name[0].toUpperCase()}</div>
+                  )}
                 </div>
                 <div className="card-title-button">
                   <h5 className="card-item-title">{item.name}</h5>

@@ -56,12 +56,12 @@
 }
 
 .cancel {
-  background: rgb(200, 50, 50) !important;
+  background: #e64942 !important;
   border: none !important;
 }
 
 .cancel:hover {
-  background: rgb(223, 28, 28) !important;
+  background: #e43930 !important;
 }
 
 .send {

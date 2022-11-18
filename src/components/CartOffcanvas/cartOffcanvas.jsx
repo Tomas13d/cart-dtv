@@ -19,9 +19,9 @@ function CartOffcanvas({ setShowCart, showCart }) {
   const handleSend = () => {
     swal({
       title: "¿Deseas confirmar este pedido?",
-      icon: "info",
+      icon: "warning",
       buttons: true,
-      dangerMode: true,
+      
     })
     .then((willDelete) => {
       if (willDelete) {
@@ -58,6 +58,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
       title: "¿Quieres descartar esta lista?",
       icon: "warning",
       buttons: true,
+      dangerMode: true,
     })
     .then((willDelete) => {
       if (willDelete) {
@@ -95,11 +96,15 @@ function CartOffcanvas({ setShowCart, showCart }) {
               {cart.map((item, i) => (
                 <div className="cart-item" key={i}>
                   <div className="cart-img-title-cont">
-                    <img
+                  {item.img ? (
+                      <img
                       src={item.img}
                       className="cart-item-img"
                       alt={item.name}
                     />
+                  ) : (
+                    <div className="no-img">{item.name[0].toUpperCase()}</div>
+                  )}
                     <h5 className="cart-item-title">{item.name}</h5>
                   </div>
                   <i

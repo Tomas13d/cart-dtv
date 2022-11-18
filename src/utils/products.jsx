@@ -30,7 +30,7 @@ const products = [
     {
       id: 5,
       name: "Destornilladores",
-      img: "https://http2.mlstatic.com/D_NQ_NP_982453-MLA47035626962_082021-O.webp",
+      img: "",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
