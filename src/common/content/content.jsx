@@ -42,7 +42,7 @@ function Content({ products}) {
                     alt={item.name}
                   />
                 </div>
-                <div className="cart-title-button">
+                <div className="card-title-button">
                   <h5 className="card-item-title">{item.name}</h5>
                   <p className="description-item">{item.description ? (item.description.length > 60 ? `${item.description.substring(0,60)}...` : item.description ) : "" }</p>
                   <div className="button-cont">
