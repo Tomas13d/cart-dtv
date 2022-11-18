@@ -20,6 +20,8 @@
 }
 .description-item{
     font-size: 13px;
+    text-overflow: ellipsis;
+    width: 100%; 
 }
 
 .item-card{

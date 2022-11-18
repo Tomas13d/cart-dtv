@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import swal from "sweetalert";
+import { GeneralContext } from "../../context/generalContext";
 import "./cartOffcanvas.css";
 
 function CartOffcanvas({ setShowCart, showCart }) {
   const [cart, setCart] = useState([]);
-  const [flag, setFlag] = useState(false);
+  
+
+  const {flag, setFlag} = useContext(GeneralContext)
 
   useEffect(() => {
     const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
@@ -13,6 +17,28 @@ function CartOffcanvas({ setShowCart, showCart }) {
   }, [flag]);
 
   const handleSend = () => {
+    swal({
+      title: "¿Deseas confirmar este pedido?",
+      icon: "info",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        window.localStorage.clear();
+        setFlag(flag ? false : true);
+        swal("Tu pedido fue realizado", {
+          icon: "success",
+        });
+      } else {
+        swal({
+          title: "Cancelado",
+          icon: "error",
+          buttons: false,
+          timer: 1000,
+        })
+      }
+    });
     setFlag(flag ? false : true);
   };
 
@@ -28,8 +54,29 @@ function CartOffcanvas({ setShowCart, showCart }) {
   };
 
   const handleDeletAll = () => {
-    window.localStorage.clear();
-    setFlag(flag ? false : true);
+    swal({
+      title: "¿Quieres descartar esta lista?",
+      icon: "warning",
+      buttons: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        window.localStorage.clear();
+        setFlag(flag ? false : true);
+        swal("Se eliminaron todos los productos", {
+          icon: "success",
+        });
+      } else {
+        swal({
+          title: "Cancelado",
+          icon: "error",
+          buttons: false,
+          timer: 1000,
+        })
+      }
+    });
+    
+    
   };
 
   return (
@@ -69,7 +116,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
               >
                 Descartar Pedido
               </Button>
-              <Button className="send-reques-button send">
+              <Button className="send-reques-button send" onClick={handleSend}>
                 Pedir Herramientas
               </Button>
             </div>
