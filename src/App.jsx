@@ -1,7 +1,7 @@
 import NavBar from "./components/navBar/navBar";
 import "./App.css";
 import { useEffect } from "react";
-import Content from "./common/content";
+import Content from "./common/content/content";
 
 function App() {
   const products = [
