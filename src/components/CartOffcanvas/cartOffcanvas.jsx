@@ -7,9 +7,8 @@ import "./cartOffcanvas.css";
 
 function CartOffcanvas({ setShowCart, showCart }) {
   const [cart, setCart] = useState([]);
-  
 
-  const {generalData, setGeneralData} = useContext(GeneralContext)
+  const { generalData, setGeneralData } = useContext(GeneralContext);
 
   useEffect(() => {
     const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
@@ -21,12 +20,10 @@ function CartOffcanvas({ setShowCart, showCart }) {
       title: "¿Deseas confirmar este pedido?",
       icon: "warning",
       buttons: true,
-      
-    })
-    .then((willDelete) => {
+    }).then((willDelete) => {
       if (willDelete) {
         window.localStorage.clear();
-        setGeneralData({...generalData, windowFlag: !generalData})
+        setGeneralData({ ...generalData, windowFlag: !generalData });
         swal("Tu pedido fue realizado", {
           icon: "success",
         });
@@ -36,10 +33,10 @@ function CartOffcanvas({ setShowCart, showCart }) {
           icon: "error",
           buttons: false,
           timer: 1000,
-        })
+        });
       }
     });
-    setGeneralData({...generalData, windowFlag: !generalData})
+    setGeneralData({ ...generalData, windowFlag: !generalData });
   };
 
   const handleDelet = (item) => {
@@ -50,7 +47,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
       }
     }
     window.localStorage.setItem("Cart", JSON.stringify(storageCart));
-    setGeneralData({...generalData, windowFlag: !generalData})
+    setGeneralData({ ...generalData, windowFlag: !generalData });
   };
 
   const handleDeletAll = () => {
@@ -59,11 +56,10 @@ function CartOffcanvas({ setShowCart, showCart }) {
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    })
-    .then((willDelete) => {
+    }).then((willDelete) => {
       if (willDelete) {
         window.localStorage.clear();
-        setGeneralData({...generalData, windowFlag: !generalData})
+        setGeneralData({ ...generalData, windowFlag: !generalData });
         swal("Se eliminaron todos los productos", {
           icon: "success",
         });
@@ -73,11 +69,9 @@ function CartOffcanvas({ setShowCart, showCart }) {
           icon: "error",
           buttons: false,
           timer: 1000,
-        })
+        });
       }
     });
-    
-    
   };
 
   return (
@@ -87,7 +81,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
       onHide={() => setShowCart(false)}
     >
       <Offcanvas.Header className="offcanvas-title-cont" closeButton>
-        <Offcanvas.Title>Mi Listado</Offcanvas.Title>
+        <Offcanvas.Title>Mi Pedido</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body className="offcanvas-body-custom">
         {cart && cart.length > 0 ? (
@@ -96,21 +90,31 @@ function CartOffcanvas({ setShowCart, showCart }) {
               {cart.map((item, i) => (
                 <div className="cart-item" key={i}>
                   <div className="cart-img-title-cont">
-                  {item.img ? (
+                    {item.img ? (
                       <img
-                      src={item.img}
-                      className="cart-item-img"
-                      alt={item.name}
-                    />
-                  ) : (
-                    <div className="no-img">{item.name[0].toUpperCase()}</div>
-                  )}
-                    <h5 className="cart-item-title">{item.name}</h5>
+                        src={item.img}
+                        className="cart-item-img"
+                        alt={item.name}
+                      />
+                    ) : (
+                      <div className="no-img">{item.name[0].toUpperCase()}</div>
+                    )}
+                    <div className="title-icons-cont">
+                    <h5 className="cart-item-title"><strong>{item.name}</strong></h5>
+                    <div className="cart-icons-cont">
+                      <div className="cart-amount">
+                        <i class="bi bi-dash add-remove-icons"></i>
+                        <h6 className="amount-number">{item.amount}</h6>
+                        <i class="bi bi-plus-lg add-remove-icons"></i>
+                      </div>
+                      <i
+                        className="bi bi-trash cart-item-trash"
+                        onClick={() => handleDelet(item)}
+                      ></i>
+                    </div>
+                    </div>
+                    
                   </div>
-                  <i
-                    className="bi bi-trash cart-item-trash"
-                    onClick={() => handleDelet(item)}
-                  ></i>
                 </div>
               ))}
             </div>

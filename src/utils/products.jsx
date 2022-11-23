@@ -1,7 +1,7 @@
 const products = [
     {
       id: 1,
-      name: "Soladora",
+      name: "Soldadora",
       img: "https://http2.mlstatic.com/D_NQ_NP_2X_721116-MLA41994139197_052020-F.webp",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",

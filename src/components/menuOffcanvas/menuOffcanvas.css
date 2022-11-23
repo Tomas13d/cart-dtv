@@ -4,12 +4,14 @@
 .offcanvas-body-custom {
   padding: 0 !important;
 }
+.category-sub-cont{
+  margin: 20px 0px;
+}
 
 .item-box {
   width: 100%;
   padding: 10px;
-  background-color: #eceaea85;
-  margin: 20px 0px;
+  background-color: #f3f6f8;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,16 +28,44 @@
 .logout-box {
   width: 100%;
   position: absolute;
+  background-color: #fff;
   bottom: 0;
   padding: 20px;
   border-top: 1px solid rgba(182, 182, 182, 0.596);
 }
 .user-icon {
-  color: #1c9cdf;
-  font-size: 25px;
+  color: #1f6c9a;
+  font-size: 30px;
 }
 
 .logout-message:hover {
   cursor: pointer;
   color: #b4b4b4;
+}
+
+.no-display{
+  display: none;
+}
+
+.show{
+  display: block;
+}
+
+.sub-box{
+  width: 95%;
+  margin-left: auto ;
+  margin-top: 5px;
+}
+
+.subitem-box{
+  width: 100%;
+  padding: 10px;
+  background-color: #f3f4f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rotate{
+  transform: rotate(180deg);
 }
