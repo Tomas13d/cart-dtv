@@ -22,6 +22,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
       buttons: true,
     }).then((willDelete) => {
       if (willDelete) {
+        
         window.localStorage.clear();
         setGeneralData({ ...generalData, windowFlag: !generalData });
         swal("Tu pedido fue realizado", {
@@ -42,7 +43,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
   const handleDelet = (item) => {
     const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
     for (let i in storageCart) {
-      if (storageCart[i].id === item.id) {
+      if (storageCart[i].cod_subrubro === item.cod_subrubro) {
         storageCart.splice(i, 1);
       }
     }
@@ -58,7 +59,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        window.localStorage.clear();
+        window.localStorage.setItem("Cart", '[]');
         setGeneralData({ ...generalData, windowFlag: !generalData });
         swal("Se eliminaron todos los productos", {
           icon: "success",
@@ -74,11 +75,38 @@ function CartOffcanvas({ setShowCart, showCart }) {
     });
   };
 
+ const handleAdd = (item) => {
+  const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
+    for (let i in storageCart) {
+      if (storageCart[i].cod_subrubro === item.cod_subrubro) {
+        storageCart[i].cantidad++
+      }
+    }
+    window.localStorage.setItem("Cart", JSON.stringify(storageCart));
+    setGeneralData({ ...generalData, windowFlag: !generalData });
+ }
+ const handleRemove = (item) => {
+  const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
+    for (let i in storageCart) {
+      if (storageCart[i].cod_subrubro === item.cod_subrubro) {
+        if(storageCart[i].cantidad === 1){
+          storageCart.splice(i, 1);
+        } else {
+          storageCart[i].cantidad--
+        }
+      }
+    }
+    window.localStorage.setItem("Cart", JSON.stringify(storageCart));
+    setGeneralData({ ...generalData, windowFlag: !generalData });
+}
+
+
   return (
     <Offcanvas
       show={showCart}
       placement="end"
       onHide={() => setShowCart(false)}
+
     >
       <Offcanvas.Header className="offcanvas-title-cont" closeButton>
         <Offcanvas.Title>Mi Pedido</Offcanvas.Title>
@@ -94,18 +122,18 @@ function CartOffcanvas({ setShowCart, showCart }) {
                       <img
                         src={item.img}
                         className="cart-item-img"
-                        alt={item.name}
+                        alt={item.cod_subrubro}
                       />
                     ) : (
-                      <div className="no-img">{item.name[0].toUpperCase()}</div>
+                      <div className="no-img">{item.cod_subrubro[0].toUpperCase()}</div>
                     )}
                     <div className="title-icons-cont">
-                    <h5 className="cart-item-title"><strong>{item.name}</strong></h5>
+                    <h5 className="cart-item-title"><strong>{item.cod_subrubro}</strong></h5>
                     <div className="cart-icons-cont">
                       <div className="cart-amount">
-                        <i class="bi bi-dash add-remove-icons"></i>
-                        <h6 className="amount-number">{item.amount}</h6>
-                        <i class="bi bi-plus-lg add-remove-icons"></i>
+                        <i class="bi bi-dash add-remove-icons" onClick={() => handleRemove(item)}></i>
+                        <h6 className="amount-number">{item.cantidad}</h6>
+                        <i class="bi bi-plus-lg add-remove-icons" onClick={() => handleAdd(item)}></i>
                       </div>
                       <i
                         className="bi bi-trash cart-item-trash"

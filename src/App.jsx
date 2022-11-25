@@ -1,21 +1,41 @@
 import NavBar from "./components/navBar/navBar";
 import "./App.css";
-import products from "./utils/products";
+import categories from "./utils/categories";
 import Content from "./common/content/content";
-import GeneralContextProvider from "./context/generalContext";
+import { GeneralContext } from "./context/generalContext";
 import Footer from "./components/footer/footer";
-
+import { useContext, useEffect, useState } from "react";
 
 function App() {
-  
+  const { generalData, setGeneralData } = useContext(GeneralContext);
+
+  const handleJsonItems = (jsonCategories) => {
+    let allProducts = [];
+    jsonCategories.forEach((product) => {
+      allProducts.push(product.items);
+    });
+    return allProducts.flat();
+  };
+
+  useEffect(() => {
+    if (categories) {
+      setGeneralData({
+        ...generalData,
+        selectedCategorie: {
+          cod_subrubro: "",
+          items: handleJsonItems(categories),
+        },
+        allProducts: handleJsonItems(categories),
+      });
+    }
+  }, []);
 
   return (
-    <GeneralContextProvider>
+    <>
       <NavBar />
-      <Content products={products}/>
-      <Footer/>
-    </GeneralContextProvider>
-  
+      <Content />
+      {/* <Footer/> */}
+    </>
   );
 }
 

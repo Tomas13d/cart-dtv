@@ -3,7 +3,7 @@ import swal from "sweetalert";
 import { GeneralContext } from "../../context/generalContext";
 import "./content.css";
 
-function Content({ products }) {
+function Content() {
   const { generalData, setGeneralData } = useContext(GeneralContext);
 
   const handleAdd = (item) => {
@@ -13,22 +13,22 @@ function Content({ products }) {
       if (parsedCart.length !== 0) {
         let flag = false;
         parsedCart.forEach((storageItem) => {
-          if (storageItem.id === item.id) {
-            storageItem.amount++;
+          if (storageItem.cod_subrubro === item.cod_subrubro) {
+            storageItem.cantidad++;
             flag = true;
           }
         });
         if (!flag) {
-          item.amount = 1;
+          item.cantidad = 1;
           parsedCart.push(item);
         }
       } else {
-        item.amount = 1;
+        item.cantidad = 1;
         parsedCart.push(item);
       }
       window.localStorage.setItem("Cart", JSON.stringify(parsedCart));
     } else {
-      item.amount = 1;
+      item.cantidad = 1;
       const newCart = [item];
       window.localStorage.setItem("Cart", JSON.stringify(newCart));
     }
@@ -45,14 +45,16 @@ function Content({ products }) {
   return (
     <section className="center-content-cont">
       <h4 className="content-title">
-        {generalData.selectedCategorie.name
-          ? generalData.selectedCategorie.name
+        {generalData.selectedCategorie.rubro
+          ? generalData.selectedCategorie.rubro
           : "Todos los productos"}
       </h4>
       <div className="cards-cont">
-        {products && products.length > 0 ? (
+        {generalData &&
+        generalData.selectedCategorie.items &&
+        generalData.selectedCategorie.items.length > 0 ? (
           <>
-            {products.map((item, i) => (
+            {generalData.selectedCategorie.items.map((item, i) => (
               <div className="item-card" key={i}>
                 <div className="img-card-cont">
                   {item.img ? (
@@ -62,11 +64,13 @@ function Content({ products }) {
                       alt={item.name}
                     />
                   ) : (
-                    <div className="no-img">{item.name[0].toUpperCase()}</div>
+                    <div className="no-img">
+                      {item.cod_subrubro[0].toUpperCase()}
+                    </div>
                   )}
                 </div>
                 <div className="card-title-button">
-                  <h5 className="card-item-title">{item.name}</h5>
+                  <h5 className="card-item-title">{item.cod_subrubro}</h5>
                   <p className="description-item">
                     {item.description
                       ? item.description.length > 60

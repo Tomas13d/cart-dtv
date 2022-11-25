@@ -1,3 +1,9 @@
+.menu{
+  background-color: #000000c8 !important;
+  color: #fff !important;
+}
+
+
 .offcanvas-title-cont {
   border-bottom: 1px solid #b4b4b4;
 }
@@ -11,7 +17,6 @@
 .item-box {
   width: 100%;
   padding: 10px;
-  background-color: #f3f6f8;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,14 +33,13 @@
 .logout-box {
   width: 100%;
   position: absolute;
-  background-color: #fff;
   bottom: 0;
   padding: 20px;
   border-top: 1px solid rgba(182, 182, 182, 0.596);
 }
 .user-icon {
-  color: #1f6c9a;
-  font-size: 30px;
+  color: #fff;
+  font-size: 25px;
 }
 
 .logout-message:hover {

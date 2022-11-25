@@ -17,10 +17,10 @@
 }
 
 .cart-item-img {
-  width: 100px;
-  height: 80px;
-  min-width: 100px;
-  min-height: 80px;
+  width: 90px;
+  height: 90px;
+  min-width: 90px;
+  min-height: 90px;
 }
 
 .cart-item-title {
@@ -82,7 +82,7 @@
 }
 
 .list-cont {
-  height: 510px;
+  height: 700px;
   width: 100%;
   overflow-y: scroll;
 }
@@ -119,16 +119,17 @@
   justify-content: space-between;
   align-items: baseline;
   margin: 0px 20px;
-  font-size: 20px;
 }
 
 .amount-number{
   margin-left: 10px;
   margin-right: 10px;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 400;
 }
+
 .add-remove-icons{
+  font-size: 20px;
   height: 25px;
   width: 25px;
   display: flex;

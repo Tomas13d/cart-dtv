@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { GeneralContext } from "../../context/generalContext";
 import categories from "../../utils/categories";
@@ -8,42 +8,49 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
   const { generalData, setGeneralData } = useContext(GeneralContext);
   const [clickOn, setClickOn] = useState(null)
 
- 
-  const handleCategorieSelect = (index) => {
+  /* const handleCategorieSelect = (index) => {
     setClickOn(clickOn === index ? null : index)
   };
-
+ */
   const handleSubCategorieSelect = (item) => {
     setGeneralData({ ...generalData, selectedCategorie: item });
     setShowCategories(false);
-
   };
 
+  const selectAllProducts = () => {
+    setGeneralData({ ...generalData, selectedCategorie: {
+      cod_subrubro: "",
+      items: generalData.allProducts
+    }});
+    setShowCategories(false);
+  }
+
   return (
-    <Offcanvas show={showCategories} onHide={() => setShowCategories(false)}>
-      <Offcanvas.Header className="offcanvas-title-cont" closeButton>
+    <Offcanvas show={showCategories} onHide={() => setShowCategories(false)} className="menu">
+      <Offcanvas.Header className="offcanvas-title-cont" closeButton closeVariant='white'>
         <Offcanvas.Title>{`Hola ${""}`}</Offcanvas.Title>
       </Offcanvas.Header>
 
       <Offcanvas.Body className="offcanvas-body-custom">
-        {categories.map((categorie, i) => (
+        {categories && categories.map((categorie, i) => (
           <div className="category-sub-cont">
           <div
             className="item-box"
             key={i}
-            onClick={() => handleCategorieSelect(i)}
+            onClick={() => handleSubCategorieSelect(categorie)}
           >
             <h4>
               <i className={categorie.icon_name}> </i>
               {categorie.rubro}
             </h4>{" "}
-            <i className={`bi bi-caret-down arrow-custom ${clickOn === i ? "rotate" : ""}`}> </i>
+            <i className={`bi bi-arrow-right arrow-custom`}> </i>
           </div>
+          
          
-          {categorie.items &&
-              categorie.items.map((subcategory) => {
+          {/* {jsonCategories.items &&
+              jsonCategories.items.map((subcategory, i ) => {
                 return (
-                  <div className={`sub-box ${clickOn === i ? "show" : "no-display"}`}>
+                  <div key={i} className={`sub-box ${clickOn === i ? "show" : "no-display"}`}>
                   <div className="subitem-box" onClick={() => handleSubCategorieSelect(subcategory)}>
                     <h6 class="">
                       <i className={subcategory.icon_name}> </i>
@@ -53,13 +60,23 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
                   </div>
                   </div>
                 );
-              })}
+              })} */}
        
           </div>
         ))}
+        <div
+            className="item-box"
+            onClick={selectAllProducts}
+          >
+            <h4>
+              <i className=""> </i>
+              TODOS LOS PRODUCTOS
+            </h4>{" "}
+            <i className={`bi bi-arrow-right arrow-custom`}> </i>
+          </div>
         <div className="logout-box">
           <h5 className="logout-message">
-            <i className="bi bi-person-circle user-icon"> </i> Cerrar Sesión
+            <i className="bi bi-box-arrow-right user-icon"> </i> Cerrar Sesión
           </h5>
         </div>
       </Offcanvas.Body>
