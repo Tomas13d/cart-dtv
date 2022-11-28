@@ -1,10 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import swal from "sweetalert";
 import { GeneralContext } from "../../context/generalContext";
 import "./content.css";
 
 function Content() {
   const { generalData, setGeneralData } = useContext(GeneralContext);
+
+  useEffect(()=> {
+    if( generalData && generalData.searchedProduct && generalData.searchedProduct.value){
+      setGeneralData({...generalData, 
+      selectedCategorie: {
+          rubro: "",
+          items: [{
+           cod_subrubro: generalData.searchedProduct.value
+          }]
+      }
+      })
+    }
+  }, [generalData.searchedProduct])
 
   const handleAdd = (item) => {
     const storageCart = window.localStorage.getItem("Cart");

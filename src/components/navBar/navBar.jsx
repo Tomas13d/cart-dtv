@@ -1,12 +1,33 @@
-import React, { useState } from "react";
-import { Form, InputGroup } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import Select from 'react-select'
+import { GeneralContext } from "../../context/generalContext";
 import CartOffcanvas from "../CartOffcanvas/cartOffcanvas";
 import MenuOffcanvas from "../menuOffcanvas/menuOffcanvas";
 import "./navbar.css";
 
-function NavBar() {
+function NavBar({products}) {
   const [showCategories, setShowCategories] = useState(false);
   const [showCart, setShowCart] = useState(false);
+  const [optionProducts, setOptionProducts] = useState([])
+  const { generalData, setGeneralData } = useContext(GeneralContext);
+  const [value, setValue] = useState("")
+
+  useEffect(() => {
+    const newArray = products.map((item) => {
+      return {
+        value: item.cod_subrubro,
+        label: item.cod_subrubro,
+      }
+    })
+    setOptionProducts(newArray)
+  }, [products])
+ 
+  const handleSearch = (e) => {
+    setGeneralData({
+      ...generalData,
+      searchedProduct: e
+    });
+  }
 
   return (
     <header className="navbar-style">
@@ -20,16 +41,12 @@ function NavBar() {
         setShowCategories={setShowCategories}
       />
       {/* Searcher */}
-      <InputGroup className="input-search-cont">
-        <InputGroup.Text id="basic-addon1">
-          <i className="bi bi-search"></i>
-        </InputGroup.Text>
-        <Form.Control
-          placeholder="Buscar..."
-          aria-label="Username"
-          aria-describedby="basic-addon1"
-        />
-      </InputGroup>
+     <Select
+     className="searcher"
+     options={optionProducts}
+     onChange={handleSearch}
+     value={generalData.searchedProduct}
+     />
 
       {/* User */}
       <i className="bi bi-person-circle icons-2"></i>

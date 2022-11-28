@@ -12,13 +12,16 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
     setClickOn(clickOn === index ? null : index)
   };
  */
-  const handleSubCategorieSelect = (item) => {
-    setGeneralData({ ...generalData, selectedCategorie: item });
+  const handleSubCategorieSelect = (categorie) => { 
+    setGeneralData({ ...generalData, searchedProduct: {value:"", label:""}, selectedCategorie: {
+      cod_subrubro: categorie,
+      items: generalData.productsByCategorie[categorie],
+    } });
     setShowCategories(false);
   };
 
   const selectAllProducts = () => {
-    setGeneralData({ ...generalData, selectedCategorie: {
+    setGeneralData({ ...generalData, searchedProduct: {value:"", label:""}, selectedCategorie: {
       cod_subrubro: "",
       items: generalData.allProducts
     }});
@@ -32,16 +35,17 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
       </Offcanvas.Header>
 
       <Offcanvas.Body className="offcanvas-body-custom">
-        {categories && categories.map((categorie, i) => (
-          <div className="category-sub-cont">
+        {generalData && generalData.productsByCategorie && 
+            Object.keys(generalData.productsByCategorie).map((categorie, i) =>(
+              <div className="category-sub-cont">
           <div
             className="item-box"
             key={i}
             onClick={() => handleSubCategorieSelect(categorie)}
           >
             <h4>
-              <i className={categorie.icon_name}> </i>
-              {categorie.rubro}
+              <i className={categorie}> </i>
+              {categorie}
             </h4>{" "}
             <i className={`bi bi-arrow-right arrow-custom`}> </i>
           </div>
@@ -63,7 +67,8 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
               })} */}
        
           </div>
-        ))}
+            ))        
+        }
         <div
             className="item-box"
             onClick={selectAllProducts}

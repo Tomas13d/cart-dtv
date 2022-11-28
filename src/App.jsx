@@ -4,18 +4,31 @@ import categories from "./utils/categories";
 import Content from "./common/content/content";
 import { GeneralContext } from "./context/generalContext";
 import Footer from "./components/footer/footer";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 
 function App() {
   const { generalData, setGeneralData } = useContext(GeneralContext);
 
-  const handleJsonItems = (jsonCategories) => {
-    let allProducts = [];
-    jsonCategories.forEach((product) => {
-      allProducts.push(product.items);
+  const handleJsonItems = (categories) => {
+    const transformedCategories = {};
+    categories.forEach((categorie) => {
+      transformedCategories[categorie.rubro] = categorie.items.map(product => {
+        return {...product, rubro: categorie.rubro}
+      });
     });
-    return allProducts.flat();
-  };
+    
+    console.log("transformedCategories -->", transformedCategories)
+    return transformedCategories;
+  }
+
+    const setAllProducts = (products) => {
+      const allProducts = [];
+      for (let prop in products) {
+        allProducts.push(products[prop])
+      }
+      return allProducts.flat()
+    };
+
 
   useEffect(() => {
     if (categories) {
@@ -23,16 +36,17 @@ function App() {
         ...generalData,
         selectedCategorie: {
           cod_subrubro: "",
-          items: handleJsonItems(categories),
+          items: setAllProducts(handleJsonItems(categories)),
         },
-        allProducts: handleJsonItems(categories),
+        allProducts: setAllProducts(handleJsonItems(categories)),
+        productsByCategorie: handleJsonItems(categories),
       });
     }
   }, []);
 
   return (
     <>
-      <NavBar />
+      <NavBar products={generalData.allProducts} />
       <Content />
       {/* <Footer/> */}
     </>

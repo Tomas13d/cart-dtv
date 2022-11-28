@@ -8,7 +8,12 @@ const initialFlag = {
     cod_subrubro: "",
     items: [],
   },
+  productsByCategorie: {},
   allProducts: [],
+  searchedProduct: {
+    value: "",
+    label: ""
+  }
 };
 
 const GeneralContextProvider = ({ children }) => {
