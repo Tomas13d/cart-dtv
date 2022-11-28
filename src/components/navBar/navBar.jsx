@@ -1,33 +1,37 @@
 import React, { useContext, useEffect, useState } from "react";
-import Select from 'react-select'
+import Select from "react-select";
 import { GeneralContext } from "../../context/generalContext";
 import CartOffcanvas from "../CartOffcanvas/cartOffcanvas";
 import MenuOffcanvas from "../menuOffcanvas/menuOffcanvas";
 import "./navbar.css";
 
-function NavBar({products}) {
+function NavBar({ products }) {
   const [showCategories, setShowCategories] = useState(false);
   const [showCart, setShowCart] = useState(false);
-  const [optionProducts, setOptionProducts] = useState([])
+  const [optionProducts, setOptionProducts] = useState([]);
   const { generalData, setGeneralData } = useContext(GeneralContext);
-  const [value, setValue] = useState("")
+  const [value, setValue] = useState("");
 
   useEffect(() => {
     const newArray = products.map((item) => {
       return {
         value: item.cod_subrubro,
         label: item.cod_subrubro,
-      }
-    })
-    setOptionProducts(newArray)
-  }, [products])
- 
+        cod_subrubro: item.cod_subrubro,
+        desc_subrubro: item.cod_subrubro,
+        icon_name: item.icon_name,
+        rubro: item.rubro,
+      };
+    });
+    setOptionProducts(newArray);
+  }, [products]);
+
   const handleSearch = (e) => {
     setGeneralData({
       ...generalData,
-      searchedProduct: e
+      searchedProduct: e,
     });
-  }
+  };
 
   return (
     <header className="navbar-style">
@@ -41,12 +45,12 @@ function NavBar({products}) {
         setShowCategories={setShowCategories}
       />
       {/* Searcher */}
-     <Select
-     className="searcher"
-     options={optionProducts}
-     onChange={handleSearch}
-     value={generalData.searchedProduct}
-     />
+      <Select
+        className="searcher"
+        options={optionProducts}
+        onChange={handleSearch}
+        value={generalData.searchedProduct}
+      />
 
       {/* User */}
       <i className="bi bi-person-circle icons-2"></i>

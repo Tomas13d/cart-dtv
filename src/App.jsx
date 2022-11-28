@@ -12,23 +12,24 @@ function App() {
   const handleJsonItems = (categories) => {
     const transformedCategories = {};
     categories.forEach((categorie) => {
-      transformedCategories[categorie.rubro] = categorie.items.map(product => {
-        return {...product, rubro: categorie.rubro}
-      });
+      transformedCategories[categorie.rubro] = categorie.items.map(
+        (product) => {
+          return { ...product, rubro: categorie.rubro };
+        }
+      );
     });
-    
-    console.log("transformedCategories -->", transformedCategories)
+
+    console.log("transformedCategories -->", transformedCategories);
     return transformedCategories;
-  }
+  };
 
-    const setAllProducts = (products) => {
-      const allProducts = [];
-      for (let prop in products) {
-        allProducts.push(products[prop])
-      }
-      return allProducts.flat()
-    };
-
+  const setAllProducts = (products) => {
+    const allProducts = [];
+    for (let prop in products) {
+      allProducts.push(products[prop]);
+    }
+    return allProducts.flat();
+  };
 
   useEffect(() => {
     if (categories) {

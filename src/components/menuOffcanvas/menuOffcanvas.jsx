@@ -35,6 +35,16 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
       </Offcanvas.Header>
 
       <Offcanvas.Body className="offcanvas-body-custom">
+      <div
+            className="item-box"
+            onClick={selectAllProducts}
+          >
+            <h4>
+              <i className=""> </i>
+              TODOS LOS PRODUCTOS
+            </h4>{" "}
+            <i className={`bi bi-arrow-right arrow-custom`}> </i>
+          </div>
         {generalData && generalData.productsByCategorie && 
             Object.keys(generalData.productsByCategorie).map((categorie, i) =>(
               <div className="category-sub-cont">
@@ -69,16 +79,7 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
           </div>
             ))        
         }
-        <div
-            className="item-box"
-            onClick={selectAllProducts}
-          >
-            <h4>
-              <i className=""> </i>
-              TODOS LOS PRODUCTOS
-            </h4>{" "}
-            <i className={`bi bi-arrow-right arrow-custom`}> </i>
-          </div>
+        
         <div className="logout-box">
           <h5 className="logout-message">
             <i className="bi bi-box-arrow-right user-icon"> </i> Cerrar Sesión

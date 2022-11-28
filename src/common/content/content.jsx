@@ -6,18 +6,28 @@ import "./content.css";
 function Content() {
   const { generalData, setGeneralData } = useContext(GeneralContext);
 
-  useEffect(()=> {
-    if( generalData && generalData.searchedProduct && generalData.searchedProduct.value){
-      setGeneralData({...generalData, 
-      selectedCategorie: {
+  useEffect(() => {
+    if (
+      generalData &&
+      generalData.searchedProduct &&
+      generalData.searchedProduct.value
+    ) {
+      setGeneralData({
+        ...generalData,
+        selectedCategorie: {
           rubro: "",
-          items: [{
-           cod_subrubro: generalData.searchedProduct.value
-          }]
-      }
-      })
+          items: [
+            {
+              cod_subrubro: generalData.searchedProduct.value,
+              desc_subrubro: generalData.searchedProduct.value,
+              icon_name: generalData.searchedProduct.icon_name,
+              rubro: generalData.searchedProduct.rubro,
+            },
+          ],
+        },
+      });
     }
-  }, [generalData.searchedProduct])
+  }, [generalData.searchedProduct]);
 
   const handleAdd = (item) => {
     const storageCart = window.localStorage.getItem("Cart");
@@ -58,8 +68,8 @@ function Content() {
   return (
     <section className="center-content-cont">
       <h4 className="content-title">
-        {generalData.selectedCategorie.rubro
-          ? generalData.selectedCategorie.rubro
+        {generalData.selectedCategorie.cod_subrubro
+          ? `Categoria > ${generalData.selectedCategorie.cod_subrubro.toLowerCase()}`
           : "Todos los productos"}
       </h4>
       <div className="cards-cont">
