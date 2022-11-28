@@ -10,7 +10,13 @@ function NavBar({ products }) {
   const [showCart, setShowCart] = useState(false);
   const [optionProducts, setOptionProducts] = useState([]);
   const { generalData, setGeneralData } = useContext(GeneralContext);
+  const [cartLength, setCartLength] = useState(0);
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
+    setCartLength(storageCart.length);
+  }, [generalData]);
 
   useEffect(() => {
     const newArray = products.map((item) => {
@@ -56,10 +62,13 @@ function NavBar({ products }) {
       <i className="bi bi-person-circle icons-2"></i>
 
       {/* Cart */}
-      <i
-        className="bi bi-cart icons-2 mg-r"
-        onClick={() => setShowCart(true)}
-      ></i>
+      <div onClick={() => setShowCart(true)}>
+        <div className={cartLength ? "number-cart" : "no-display"}>
+          {cartLength}
+        </div>
+        <i className="bi bi-cart icons-2 mg-r"></i>
+      </div>
+
       <CartOffcanvas showCart={showCart} setShowCart={setShowCart} />
     </header>
   );

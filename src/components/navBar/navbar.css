@@ -34,3 +34,18 @@
   margin-left: 15px;
   color: black;
 }
+
+.number-cart{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #0b74ec;
+  color: #fff;
+  border-radius: 50%;
+  margin-left: 40px;
+  margin-top: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

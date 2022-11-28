@@ -13,7 +13,7 @@ const initialFlag = {
   searchedProduct: {
     value: "",
     label: ""
-  }
+  },
 };
 
 const GeneralContextProvider = ({ children }) => {
