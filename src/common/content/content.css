@@ -68,7 +68,11 @@
     height: 90px;
     min-width: 90px;
     min-height: 90px;
-    background-color: #1c9bdf96;
+    background-color: #1f6d9abb;
     color: #fff;
     font-size: 30px;
+}
+
+.card_icon{
+    font-size: 45px;
 }

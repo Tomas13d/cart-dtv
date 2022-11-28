@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { GeneralContext } from "../../context/generalContext";
-import categories from "../../utils/categories";
 import "./menuOffcanvas.css";
 
 function MenuOffcanvas({ setShowCategories, showCategories }) {

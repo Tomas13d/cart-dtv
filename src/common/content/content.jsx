@@ -87,9 +87,16 @@ function Content() {
                       alt={item.name}
                     />
                   ) : (
+                    item.icon_name ? (
+                      <div className="no-img">
+                        <i className={`${item.icon_name} card_icon`}></i>
+                    </div>
+                      
+                    ) : (
                     <div className="no-img">
                       {item.cod_subrubro[0].toUpperCase()}
                     </div>
+                    )
                   )}
                 </div>
                 <div className="card-title-button">

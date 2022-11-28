@@ -125,9 +125,16 @@ function CartOffcanvas({ setShowCart, showCart }) {
                         alt={item.cod_subrubro}
                       />
                     ) : (
+                      item.icon_name ? (
+                        <div className="no-img">
+                          <i className={`${item.icon_name} card_icon`}></i>
+                      </div>
+                        
+                      ) : (
                       <div className="no-img">
                         {item.cod_subrubro[0].toUpperCase()}
                       </div>
+                      )
                     )}
                     <div className="title-icons-cont">
                       <h5 className="cart-item-title">
