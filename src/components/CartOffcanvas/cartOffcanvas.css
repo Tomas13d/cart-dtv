@@ -41,9 +41,11 @@
 .send-request {
   width: 100%;
   position: absolute;
+  z-index: 10;
   bottom: 0;
   padding: 20px;
   border-top: 1px solid rgba(182, 182, 182, 0.596);
+  background: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,9 +84,8 @@
 }
 
 .list-cont {
-  height: 700px;
   width: 100%;
-  overflow-y: scroll;
+  overflow-y: scroll; 
 }
 
 .list-cont::-webkit-scrollbar {
@@ -97,7 +98,7 @@
 }
 
 .list-cont::-webkit-scrollbar-thumb {
-  background: #1f6c9a;
+  background: #1f4bc2;
   border-radius: 20px;
 }
 

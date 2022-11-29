@@ -15,7 +15,7 @@ function NavBar({ products }) {
 
   useEffect(() => {
     const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
-    setCartLength(storageCart.length);
+    if(storageCart) setCartLength(storageCart.length);
   }, [generalData]);
 
   useEffect(() => {

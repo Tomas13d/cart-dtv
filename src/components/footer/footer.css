@@ -1,5 +1,6 @@
 .footer-stl{
     width: 100%;
+    position: absolute;
     background-color: #08192b;
     bottom: 0;
     display: flex;

@@ -18,8 +18,6 @@ function App() {
         }
       );
     });
-
-    console.log("transformedCategories -->", transformedCategories);
     return transformedCategories;
   };
 
