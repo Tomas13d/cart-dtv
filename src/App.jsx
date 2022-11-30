@@ -9,6 +9,9 @@ import { useContext, useEffect } from "react";
 function App() {
   const { generalData, setGeneralData } = useContext(GeneralContext);
 
+
+  
+
   const handleJsonItems = (categories) => {
     const transformedCategories = {};
     categories.forEach((categorie) => {
