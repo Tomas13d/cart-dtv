@@ -24,7 +24,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
     }).then((willAcept) => {
       if (willAcept) {
         let token =
-          "9c9145ea23717c50ef39b32bb922f816a284bf7863f5f64eecd806275932c378c9cf5f7f34cc3e1cd03796d7f79ce274b89afeb3579eb3aa38507ed670e7";
+          "9c9145ea23717c53e730b42ba02ff909bf89bc7763f7fb55f1d70135463dd576c7c75f622dd92901d63c94d2ea80ef60bd89fba05b95b4a8394e6ad763f6";
           const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
         sendCart({storageCart, token}).then(response => {
           swal("Pedido Enviado", response.acciones.acciones_alert[0].data, "success");
