@@ -6,7 +6,6 @@ import { setSelectedCategorie } from "../../store/reducers/generalReducer";
 import "./menuOffcanvas.css";
 
 function MenuOffcanvas({ setShowCategories, showCategories }) {
-  const { generalData, setGeneralData } = useContext(GeneralContext);
   const dispatch = useDispatch()
   const [clickOn, setClickOn] = useState(null)
   const productsByCategorie = useSelector(state => state.products.productsByCategorie)
