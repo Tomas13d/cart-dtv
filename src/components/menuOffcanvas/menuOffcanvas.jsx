@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GeneralContext } from "../../context/generalContext";
 import { setSelectedCategorie } from "../../store/reducers/generalReducer";
 import "./menuOffcanvas.css";
@@ -9,6 +9,8 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
   const { generalData, setGeneralData } = useContext(GeneralContext);
   const dispatch = useDispatch()
   const [clickOn, setClickOn] = useState(null)
+  const productsByCategorie = useSelector(state => state.products.productsByCategorie)
+  const allProducts = useSelector(state => state.products.allProducts)
 
   /* const handleCategorieSelect = (index) => {
     setClickOn(clickOn === index ? null : index)
@@ -18,14 +20,9 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
     dispatch(
       setSelectedCategorie({
         cod_subrubro: categorie,
-        items: generalData.productsByCategorie[categorie],
+        items: productsByCategorie[categorie],
       })
     )
-    
-    setGeneralData({ ...generalData, searchedProduct: {value:"", label:""}, selectedCategorie: {
-      cod_subrubro: categorie,
-      items: generalData.productsByCategorie[categorie],
-    } });
     setShowCategories(false);
   };
 
@@ -33,13 +30,9 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
     dispatch(
       setSelectedCategorie({
         cod_subrubro: "",
-        items: generalData.allProducts
+        items: allProducts,
       })
     )
-    setGeneralData({ ...generalData, searchedProduct: {value:"", label:""}, selectedCategorie: {
-      cod_subrubro: "",
-      items: generalData.allProducts
-    }});
     setShowCategories(false);
   }
 
@@ -60,8 +53,8 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
             </h4>{" "}
             <i className={`bi bi-arrow-right arrow-custom`}> </i>
           </div>
-        {generalData && generalData.productsByCategorie && 
-            Object.keys(generalData.productsByCategorie).map((categorie, i) =>(
+        {productsByCategorie && 
+            Object.keys(productsByCategorie).map((categorie, i) =>(
               <div className="category-sub-cont">
           <div
             className="item-box"

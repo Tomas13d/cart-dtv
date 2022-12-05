@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
 import swal from "sweetalert";
 import { GeneralContext } from "../../context/generalContext";
 import "./content.css";
 
 function Content() {
   const { generalData, setGeneralData } = useContext(GeneralContext);
+  const selectedCategorie = useSelector(state => state.general.selectedCategorie)
 
   useEffect(() => {
     if (
@@ -68,16 +70,15 @@ function Content() {
   return (
     <section className="center-content-cont">
       <h4 className="content-title">
-        {generalData.selectedCategorie.cod_subrubro
-          ? `Categoria > ${generalData.selectedCategorie.cod_subrubro.toLowerCase()}`
+        {selectedCategorie.cod_subrubro
+          ? `Categoria > ${selectedCategorie.cod_subrubro.toLowerCase()}`
           : "Todos los productos"}
       </h4>
       <div className="cards-cont">
-        {generalData &&
-        generalData.selectedCategorie.items &&
-        generalData.selectedCategorie.items.length > 0 ? (
+        {selectedCategorie &&
+        selectedCategorie.items.length > 0 ? (
           <>
-            {generalData.selectedCategorie.items.map((item, i) => (
+            {selectedCategorie.items.map((item, i) => (
               <div className="item-card" key={i}>
                 <div className="img-card-cont">
                   {item.img ? (

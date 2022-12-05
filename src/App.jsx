@@ -7,6 +7,7 @@ import Footer from "./components/footer/footer";
 import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllProducts, setProductsByCategorie } from "./store/reducers/productsReducer";
+import { setSelectedCategorie } from "./store/reducers/generalReducer";
 
 function App() {
   const dispatch = useDispatch()
@@ -28,6 +29,17 @@ function App() {
       )
     }
   }, [productsByCategorie]);
+
+  useEffect(() => {
+    if (allProducts) {
+      dispatch(
+        setSelectedCategorie({
+          cod_subrubro: "",
+          items: allProducts
+        })
+      )
+    }
+  }, [allProducts]);
 
 
 
