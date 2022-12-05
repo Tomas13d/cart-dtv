@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
-import { setFlag, setSelectedCategorie } from "../../store/reducers/generalReducer";
+import {
+  setFlag,
+  setSelectedCategorie,
+} from "../../store/reducers/generalReducer";
 import "./content.css";
 
 function Content() {
-  const selectedCategorie = useSelector(state => state.general.selectedCategorie)
-  const searchedProduct = useSelector(state => state.general.searchedProduct)
-  const flagStore = useSelector(state => state.general.windowFlag)
-  const dispatch = useDispatch()
+  const selectedCategorie = useSelector(
+    (state) => state.general.selectedCategorie
+  );
+  const searchedProduct = useSelector((state) => state.general.searchedProduct);
+  const flagStore = useSelector((state) => state.general.windowFlag);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (
-      searchedProduct &&
-      searchedProduct.value
-    ) {
+    if (searchedProduct && searchedProduct.value) {
       dispatch(
         setSelectedCategorie({
           rubro: "",
@@ -26,12 +28,13 @@ function Content() {
               rubro: searchedProduct.rubro,
             },
           ],
-        },)
-      )
-  }}, [searchedProduct]);
+        })
+      );
+    }
+  }, [searchedProduct]);
 
   const handleAdd = (item) => {
-    let product = {}
+    let product = {};
     const storageCart = window.localStorage.getItem("Cart");
     if (storageCart) {
       const parsedCart = JSON.parse(storageCart);
@@ -46,29 +49,27 @@ function Content() {
         if (!flag) {
           product = {
             ...item,
-            cantidad: 1
-          }
+            cantidad: 1,
+          };
           parsedCart.push(product);
         }
       } else {
         product = {
           ...item,
-          cantidad: 1
-        }
+          cantidad: 1,
+        };
         parsedCart.push(product);
       }
       window.localStorage.setItem("Cart", JSON.stringify(parsedCart));
     } else {
       product = {
         ...item,
-        cantidad: 1
-      }
+        cantidad: 1,
+      };
       const newCart = [product];
       window.localStorage.setItem("Cart", JSON.stringify(newCart));
     }
-    dispatch(
-      setFlag(flagStore ? false : true)
-    )
+    dispatch(setFlag(flagStore ? false : true));
     swal({
       title: "Agregado",
       text: "Se añadió un producto a la lista",
@@ -86,8 +87,7 @@ function Content() {
           : "Todos los productos"}
       </h4>
       <div className="cards-cont">
-        {selectedCategorie &&
-        selectedCategorie.items.length > 0 ? (
+        {selectedCategorie && selectedCategorie.items.length > 0 ? (
           <>
             {selectedCategorie.items.map((item, i) => (
               <div className="item-card" key={i}>
@@ -98,17 +98,14 @@ function Content() {
                       className="cart-item-img"
                       alt={item.name}
                     />
-                  ) : (
-                    item.icon_name ? (
-                      <div className="no-img">
-                        <i className={`${item.icon_name} card_icon`}></i>
+                  ) : item.icon_name ? (
+                    <div className="no-img">
+                      <i className={`${item.icon_name} card_icon`}></i>
                     </div>
-                      
-                    ) : (
+                  ) : (
                     <div className="no-img">
                       {item.cod_subrubro[0].toUpperCase()}
                     </div>
-                    )
                   )}
                 </div>
                 <div className="card-title-button">
