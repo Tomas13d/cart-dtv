@@ -1,10 +1,13 @@
 import React, { useContext, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { useDispatch } from "react-redux";
 import { GeneralContext } from "../../context/generalContext";
+import { setSelectedCategorie } from "../../store/reducers/generalReducer";
 import "./menuOffcanvas.css";
 
 function MenuOffcanvas({ setShowCategories, showCategories }) {
   const { generalData, setGeneralData } = useContext(GeneralContext);
+  const dispatch = useDispatch()
   const [clickOn, setClickOn] = useState(null)
 
   /* const handleCategorieSelect = (index) => {
@@ -12,6 +15,13 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
   };
  */
   const handleSubCategorieSelect = (categorie) => { 
+    dispatch(
+      setSelectedCategorie({
+        cod_subrubro: categorie,
+        items: generalData.productsByCategorie[categorie],
+      })
+    )
+    
     setGeneralData({ ...generalData, searchedProduct: {value:"", label:""}, selectedCategorie: {
       cod_subrubro: categorie,
       items: generalData.productsByCategorie[categorie],
@@ -20,6 +30,12 @@ function MenuOffcanvas({ setShowCategories, showCategories }) {
   };
 
   const selectAllProducts = () => {
+    dispatch(
+      setSelectedCategorie({
+        cod_subrubro: "",
+        items: generalData.allProducts
+      })
+    )
     setGeneralData({ ...generalData, searchedProduct: {value:"", label:""}, selectedCategorie: {
       cod_subrubro: "",
       items: generalData.allProducts

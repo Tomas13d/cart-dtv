@@ -16,16 +16,14 @@ const initialFlag = {
   },
 };
 
-const initialUser = {
-     
-}
+
 
 const GeneralContextProvider = ({ children }) => {
   const [generalData, setGeneralData] = useState(initialFlag);
-  const [sessionUser, setSessionUser] = useState(initialUser)
+  
 
   return (
-    <GeneralContext.Provider value={{ generalData, setGeneralData, sessionUser, setSessionUser}}>
+    <GeneralContext.Provider value={{ generalData, setGeneralData}}>
       {children}
     </GeneralContext.Provider>
   );
