@@ -16,6 +16,10 @@ export const setSelectedCategorie = createAsyncThunk(
   'SET_CATEGORY',
   generalActions.setSelectedCategorie
 )
+export const setFlag = createAsyncThunk(
+  'SET_FLAG',
+  generalActions.setFlag
+)
 
 
 export const generalSlice = createSlice({
@@ -40,6 +44,23 @@ export const generalSlice = createSlice({
         cod_subrubro: "",
         items: [],
       }
+      state.error = action.error.message || 'something went wrong'
+    })
+    builder.addCase(setFlag.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(
+      setFlag.fulfilled,
+      (state, action) => {
+          state.loading = false
+          state.windowFlag = action.payload
+          state.error = ''
+      
+      }
+    )
+    builder.addCase(setFlag.rejected, (state, action) => {
+      state.loading = false
+      state.windowFlag = false
       state.error = action.error.message || 'something went wrong'
     })
   },

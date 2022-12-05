@@ -1,6 +1,6 @@
 
 export const setFlag = (flag) => {
-    return !flag
+    return flag
 }
 
 export const setSelectedCategorie = (categorie) => {

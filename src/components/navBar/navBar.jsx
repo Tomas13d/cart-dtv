@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
-import { GeneralContext } from "../../context/generalContext";
+import { setSearchedProduct } from "../../store/reducers/productsReducer";
 import CartOffcanvas from "../CartOffcanvas/cartOffcanvas";
 import MenuOffcanvas from "../menuOffcanvas/menuOffcanvas";
 import "./navbar.css";
@@ -9,14 +10,16 @@ function NavBar({ products }) {
   const [showCategories, setShowCategories] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [optionProducts, setOptionProducts] = useState([]);
-  const { generalData, setGeneralData } = useContext(GeneralContext);
   const [cartLength, setCartLength] = useState(0);
-  const [value, setValue] = useState("");
+  const dispatch = useDispatch()
+  const searchedProduct = useSelector(state => state.products.searchedProduct)
+  const flag = useSelector((state) => state.general.windowFlag);
+
 
   useEffect(() => {
     const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
     if(storageCart) setCartLength(storageCart.length);
-  }, [generalData]);
+  }, [flag]);
 
   useEffect(() => {
     const newArray = products.map((item) => {
@@ -33,10 +36,9 @@ function NavBar({ products }) {
   }, [products]);
 
   const handleSearch = (e) => {
-    setGeneralData({
-      ...generalData,
-      searchedProduct: e,
-    });
+    dispatch(
+      setSearchedProduct(e)
+    )
   };
 
   return (
@@ -55,7 +57,7 @@ function NavBar({ products }) {
         className="searcher"
         options={optionProducts}
         onChange={handleSearch}
-        value={generalData.searchedProduct}
+        value={searchedProduct}
       />
 
       {/* User */}

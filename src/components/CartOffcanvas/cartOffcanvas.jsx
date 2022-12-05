@@ -5,16 +5,18 @@ import swal from "sweetalert";
 import { GeneralContext } from "../../context/generalContext";
 import "./cartOffcanvas.css";
 import { sendCart } from "../../service/cart";
+import { useDispatch, useSelector } from "react-redux";
+import { setFlag } from "../../store/reducers/generalReducer";
 
 function CartOffcanvas({ setShowCart, showCart }) {
   const [cart, setCart] = useState([]);
-
-  const { generalData, setGeneralData } = useContext(GeneralContext);
+  const dispatch = useDispatch();
+  const flag = useSelector((state) => state.general.windowFlag);
 
   useEffect(() => {
     const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
     setCart(storageCart);
-  }, [generalData]);
+  }, [flag]);
 
   const handleSend = () => {
     swal({
@@ -25,11 +27,15 @@ function CartOffcanvas({ setShowCart, showCart }) {
       if (willAcept) {
         let token =
           "9c9145ea23717c53e730b42ba02ff909bf89bc7763f7fb55f1d70135463dd576c7c75f622dd92901d63c94d2ea80ef60bd89fba05b95b4a8394e6ad763f6";
-          const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
-        sendCart({storageCart, token}).then(response => {
-          swal("Pedido Enviado", response.acciones.acciones_alert[0].data, "success");
-        })
-        setGeneralData({ ...generalData, windowFlag: !generalData });
+        const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
+        sendCart({ storageCart, token }).then((response) => {
+          swal(
+            "Pedido Enviado",
+            response.acciones.acciones_alert[0].data,
+            "success"
+          );
+        });
+        dispatch(setFlag(flag ? false : true));
       } else {
         swal({
           title: "Cancelado",
@@ -39,7 +45,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
         });
       }
     });
-    setGeneralData({ ...generalData, windowFlag: !generalData });
+    dispatch(setFlag(flag ? false : true));
   };
 
   const handleDelet = (item) => {
@@ -50,7 +56,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
       }
     }
     window.localStorage.setItem("Cart", JSON.stringify(storageCart));
-    setGeneralData({ ...generalData, windowFlag: !generalData });
+    dispatch(setFlag(flag ? false : true));
   };
 
   const handleDeletAll = () => {
@@ -62,7 +68,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
     }).then((willDelete) => {
       if (willDelete) {
         window.localStorage.setItem("Cart", "[]");
-        setGeneralData({ ...generalData, windowFlag: !generalData });
+        dispatch(setFlag(flag ? false : true));
         swal("Se eliminaron todos los productos", {
           icon: "success",
         });
@@ -85,7 +91,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
       }
     }
     window.localStorage.setItem("Cart", JSON.stringify(storageCart));
-    setGeneralData({ ...generalData, windowFlag: !generalData });
+    dispatch(setFlag(flag ? false : true));
   };
   const handleRemove = (item) => {
     const storageCart = JSON.parse(window.localStorage.getItem("Cart"));
@@ -99,7 +105,7 @@ function CartOffcanvas({ setShowCart, showCart }) {
       }
     }
     window.localStorage.setItem("Cart", JSON.stringify(storageCart));
-    setGeneralData({ ...generalData, windowFlag: !generalData });
+    dispatch(setFlag(flag ? false : true));
   };
 
   return (
@@ -124,17 +130,14 @@ function CartOffcanvas({ setShowCart, showCart }) {
                         className="cart-item-img"
                         alt={item.cod_subrubro}
                       />
-                    ) : (
-                      item.icon_name ? (
-                        <div className="no-img">
-                          <i className={`${item.icon_name} card_icon`}></i>
+                    ) : item.icon_name ? (
+                      <div className="no-img">
+                        <i className={`${item.icon_name} card_icon`}></i>
                       </div>
-                        
-                      ) : (
+                    ) : (
                       <div className="no-img">
                         {item.cod_subrubro[0].toUpperCase()}
                       </div>
-                      )
                     )}
                     <div className="title-icons-cont">
                       <h5 className="cart-item-title">

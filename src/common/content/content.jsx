@@ -1,37 +1,39 @@
 import React, { useContext, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import { GeneralContext } from "../../context/generalContext";
+import { setFlag, setSelectedCategorie } from "../../store/reducers/generalReducer";
+import { setSearchedProduct } from "../../store/reducers/productsReducer";
 import "./content.css";
 
 function Content() {
-  const { generalData, setGeneralData } = useContext(GeneralContext);
   const selectedCategorie = useSelector(state => state.general.selectedCategorie)
+  const searchedProduct = useSelector(state => state.general.searchedProduct)
+  const flagStore = useSelector(state => state.general.windowFlag)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (
-      generalData &&
-      generalData.searchedProduct &&
-      generalData.searchedProduct.value
+      searchedProduct &&
+      searchedProduct.value
     ) {
-      setGeneralData({
-        ...generalData,
-        selectedCategorie: {
+      dispatch(
+        setSelectedCategorie({
           rubro: "",
           items: [
             {
-              cod_subrubro: generalData.searchedProduct.value,
-              desc_subrubro: generalData.searchedProduct.value,
-              icon_name: generalData.searchedProduct.icon_name,
-              rubro: generalData.searchedProduct.rubro,
+              cod_subrubro: searchedProduct.value,
+              desc_subrubro: searchedProduct.value,
+              icon_name: searchedProduct.icon_name,
+              rubro: searchedProduct.rubro,
             },
           ],
-        },
-      });
-    }
-  }, [generalData.searchedProduct]);
+        },)
+      )
+  }}, [searchedProduct]);
 
   const handleAdd = (item) => {
+    let product = {}
     const storageCart = window.localStorage.getItem("Cart");
     if (storageCart) {
       const parsedCart = JSON.parse(storageCart);
@@ -44,20 +46,31 @@ function Content() {
           }
         });
         if (!flag) {
-          item.cantidad = 1;
-          parsedCart.push(item);
+          product = {
+            ...item,
+            cantidad: 1
+          }
+          parsedCart.push(product);
         }
       } else {
-        item.cantidad = 1;
-        parsedCart.push(item);
+        product = {
+          ...item,
+          cantidad: 1
+        }
+        parsedCart.push(product);
       }
       window.localStorage.setItem("Cart", JSON.stringify(parsedCart));
     } else {
-      item.cantidad = 1;
-      const newCart = [item];
+      product = {
+        ...item,
+        cantidad: 1
+      }
+      const newCart = [product];
       window.localStorage.setItem("Cart", JSON.stringify(newCart));
     }
-    setGeneralData({ ...generalData, windowFlag: !generalData });
+    dispatch(
+      setFlag(flagStore ? false : true)
+    )
     swal({
       title: "Agregado",
       text: "Se añadió un producto a la lista",
