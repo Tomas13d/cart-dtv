@@ -1,9 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
-import { GeneralContext } from "../../context/generalContext";
 import { setFlag, setSelectedCategorie } from "../../store/reducers/generalReducer";
-import { setSearchedProduct } from "../../store/reducers/productsReducer";
 import "./content.css";
 
 function Content() {

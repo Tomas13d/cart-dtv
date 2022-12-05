@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import swal from "sweetalert";
-import { GeneralContext } from "../../context/generalContext";
 import "./cartOffcanvas.css";
 import { sendCart } from "../../service/cart";
 import { useDispatch, useSelector } from "react-redux";

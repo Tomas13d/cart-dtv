@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useDispatch, useSelector } from "react-redux";
-import { GeneralContext } from "../../context/generalContext";
 import { setSelectedCategorie } from "../../store/reducers/generalReducer";
 import "./menuOffcanvas.css";
 
